@@ -1,6 +1,16 @@
 # emotionclips-coding-interpreter
 Package to convert emotionclips coding to metadata objects
 
+## Installation 
+
+Either install directly from the repository
+
+`pip install git+https://github.com/timlac/nexa-emotionclips-coding-interpreter.git`
+
+Or clone the repository and enter the directory and run:
+
+`pip install .`
+
 ## Usage
 
 get the filename without extension using the Path library or some other method:
