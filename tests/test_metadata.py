@@ -1,8 +1,6 @@
 import unittest
-from pathlib import Path
-import os
 
-from metadata import Metadata
+from coding_interpreter.metadata import Metadata
 
 
 class TestMetadata(unittest.TestCase):

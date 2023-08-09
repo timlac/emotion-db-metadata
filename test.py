@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from metadata import Metadata
+from coding_interpreter.metadata import Metadata
 
 
 def main():

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/emotion-db-metadata.iml" filepath="$PROJECT_DIR$/.idea/emotion-db-metadata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/nexa-emotionclips-coding-interpreter.iml" filepath="$PROJECT_DIR$/.idea/nexa-emotionclips-coding-interpreter.iml" />
     </modules>
   </component>
 </project>

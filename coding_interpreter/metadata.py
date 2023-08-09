@@ -1,7 +1,5 @@
-import re
-
-from mappings import emotion_id_to_valence, emotion_abr_to_emotion_id, special_cases
-from utils import name2list, get_digits_only
+from coding_interpreter.mappings import emotion_id_to_valence, emotion_abr_to_emotion_id, special_cases
+from coding_interpreter.utils import name2list, get_digits_only
 
 
 class Metadata(object):
