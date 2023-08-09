@@ -1,5 +1,5 @@
 # emotion-db-metadata
-Package to convert emotion database file names to file metadata objects
+Package to convert emotionclips coding to metadata objects
 
 ## Usage
 
