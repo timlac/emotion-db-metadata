@@ -1,4 +1,4 @@
-# emotion-db-metadata
+# emotionclips-coding-interpreter
 Package to convert emotionclips coding to metadata objects
 
 ## Usage
