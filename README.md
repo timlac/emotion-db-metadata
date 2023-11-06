@@ -30,8 +30,8 @@ call the metadata object properties, e.g.:
 ```python 
 print("filename: ", metadata.filename)
 print("video id: ", metadata.video_id)
-print("emotion 1:", metadata.emotion_1)
-print("emotion_2:", metadata.emotion_2)
+print("emotion 1:", metadata.emotion_1_abr)
+print("emotion_2:", metadata.emotion_2_abr)
 print("emotion_1_id: ", metadata.emotion_1_id)
 print("emotion_2_id: ", metadata.emotion_2_id)
 print("emotion_1_valence: ", metadata.emotion_1_valence)

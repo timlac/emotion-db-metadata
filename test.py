@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from coding_interpreter.metadata import Metadata
+from nexa_coding_interpreter.metadata import Metadata
 
 
 def main():
@@ -13,8 +13,8 @@ def main():
         meta = Metadata(Path(filename).stem)
 
         print("video id: ", meta.video_id)
-        print("emotion 1:", meta.emotion_1)
-        print("emotion_2:", meta.emotion_2)
+        print("emotion_1:", meta.emotion_1_abr)
+        print("emotion_2:", meta.emotion_2_abr)
         print("emotion_1_id: ", meta.emotion_1_id)
         print("emotion_2_id: ", meta.emotion_2_id)
         print("emotion_1_valence: ", meta.emotion_1_valence)
