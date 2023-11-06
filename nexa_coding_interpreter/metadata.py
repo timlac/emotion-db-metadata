@@ -8,19 +8,18 @@ from nexa_coding_interpreter.constants import *
 
 class Metadata(object):
 
-    DEFAULT_INTENSITY_LEVEL = 1
-    DEFAULT_VERSION = 1
-    DEFAULT_SITUATION = 1
+    DEFAULT_INTENSITY_LEVEL = None
+    DEFAULT_VERSION = None
+    DEFAULT_SITUATION = None
 
     # can be vocalization (v) or prosody (p)
-    DEFAULT_MODE = "z"
+    DEFAULT_MODE = None
 
     DEFAULT_PROPORTIONS = 0
     DEFAULT_EMOTION_ABR = None
     DEFAULT_MIX = 0
     # set it to some number not in the list
     DEFAULT_EMOTION_ID = 100
-    DEFAULT_VALENCE = None
 
     DEFAULT_ERROR = 0
 
@@ -44,8 +43,6 @@ class Metadata(object):
         self.intensity_level = self.DEFAULT_INTENSITY_LEVEL
         self.version = self.DEFAULT_VERSION
         self.situation = self.DEFAULT_SITUATION
-        self.emotion_1_valence = self.DEFAULT_VALENCE
-        self.emotion_2_valence = self.DEFAULT_VALENCE
 
         self.error = self.DEFAULT_ERROR
 
@@ -77,12 +74,13 @@ class Metadata(object):
         self.emotion_1_abr = name_list[1]
 
         if name_list[2] in modes.values():
+            warnings.warn(f'{self.filename} has incorrect syntax. The correct syntax is something like A220_neu_sit1_v')
+
             self.mode = name_list[2]
             if name_list[3] in situations.values():
                 self.situation = get_digits_only(name_list[3])
 
         elif name_list[2] in situations.values():
-            warnings.warn(f'{self.filename} has incorrect syntax. The correct syntax is something like A55_neu_p_sit3')
             self.situation = get_digits_only(name_list[2])
             if name_list[3] in modes.values():
                 self.mode = name_list[3]
@@ -109,8 +107,8 @@ class Metadata(object):
         e.g. A220_adm_p_1
         """
         assert Mapper.get_id_from_emotion_abr(name_list[1]) is not None
-        assert name_list[2] in modes
-        assert int(name_list[3]) in intensity_levels
+        assert name_list[2] in modes.values()
+        assert int(name_list[3]) in intensity_levels.values()
 
         self.emotion_1_abr = name_list[1]
         self.mode = name_list[2]
@@ -135,13 +133,6 @@ class Metadata(object):
         if self.mix == 1:
             self.emotion_2_id = Mapper.get_id_from_emotion_abr(self.emotion_2_abr)
 
-    def set_valence(self):
-        emotion_1 = Mapper.get_emotion_from_id(self.emotion_1_id)
-        self.emotion_1_valence = Mapper.get_valence_from_emotion(emotion_1)
-        if self.mix == 1:
-            emotion_2 = Mapper.get_emotion_from_id(self.emotion_2_id)
-            self.emotion_2_valence = Mapper.get_valence_from_emotion(emotion_2)
-
     def set_all_metadata(self, name_list):
         if len(name_list) == 4:
             if name_list[1] == neu:
@@ -164,4 +155,3 @@ class Metadata(object):
                 raise ValueError(f'No condition matched for {self.filename}')
 
         self.set_emotion_ids()
-        self.set_valence()
