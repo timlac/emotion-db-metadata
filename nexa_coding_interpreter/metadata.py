@@ -15,7 +15,7 @@ class Metadata(object):
     # can be vocalization (v) or prosody (p)
     DEFAULT_MODE = None
 
-    DEFAULT_PROPORTIONS = 0
+    DEFAULT_PROPORTIONS = None
     DEFAULT_EMOTION_ABR = None
     DEFAULT_MIX = 0
     # set it to some number not in the list

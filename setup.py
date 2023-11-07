@@ -5,6 +5,6 @@ setup(
     version='0.2',
     packages=find_packages(),
     install_requires=[
-        # List your package dependencies here
+        "nexa-definitions-and-mappings @ git+https://github.com/timlac/nexa-definitions-and-mappings.git"
     ],
 )

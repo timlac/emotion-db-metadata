@@ -16,10 +16,7 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_1_id, 12)
         self.assertEqual(metadata.emotion_2_id, 35)
 
-        # self.assertEqual(metadata.error, 0)
-        # self.assertEqual(metadata.mode, "v")
-        # self.assertEqual(metadata.version, 1)
-        # self.assertEqual(metadata.situation, 1)
+        self.assertEqual(metadata.proportions, 7030)
 
     def test_neutral_emotion(self):
         filename = "A220_neu_sit2_v"
@@ -31,7 +28,6 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_2_abr, None)
         self.assertEqual(metadata.emotion_1_id, 22)
         self.assertEqual(metadata.emotion_2_id, 100)
-        self.assertEqual(metadata.proportions, 0)
 
 
         self.assertEqual(metadata.mode, "v")
@@ -47,7 +43,6 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_2_abr, None)
         self.assertEqual(metadata.emotion_1_id, 22)
         self.assertEqual(metadata.emotion_2_id, 100)
-        self.assertEqual(metadata.proportions, 0)
 
         self.assertEqual(metadata.mode, "p")
         self.assertEqual(metadata.situation, 3)
@@ -62,7 +57,7 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_2_abr, None)
         self.assertEqual(metadata.emotion_1_id, 11)
         self.assertEqual(metadata.emotion_2_id, 100)
-        self.assertEqual(metadata.proportions, 0)
+        self.assertEqual(metadata.proportions, None)
 
         self.assertEqual(metadata.intensity_level, 1)
 
@@ -79,7 +74,6 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_2_abr, None)
         self.assertEqual(metadata.emotion_1_id, 5)
         self.assertEqual(metadata.emotion_2_id, 100)
-        self.assertEqual(metadata.proportions, 0)
         self.assertEqual(metadata.intensity_level, 1)
 
         self.assertEqual(metadata.mode, "p")
@@ -94,7 +88,6 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_2_abr, None)
         self.assertEqual(metadata.emotion_1_id, 12)
         self.assertEqual(metadata.emotion_2_id, 100)
-        self.assertEqual(metadata.proportions, 0)
 
         self.assertEqual(metadata.intensity_level, 1)
 
@@ -111,7 +104,7 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_2_abr, None)
         self.assertEqual(metadata.emotion_1_id, 39)
         self.assertEqual(metadata.emotion_2_id, 100)
-        self.assertEqual(metadata.proportions, 0)
+        self.assertEqual(metadata.proportions, None)
 
         self.assertEqual(metadata.intensity_level, 2)
 
