@@ -11,6 +11,10 @@ Or clone the repository and enter the directory and run:
 
 `pip install .`
 
+## Update 
+
+`pip install --upgrade git+https://github.com/timlac/nexa-emotionclips-coding-interpreter.git`
+
 ## Usage
 
 get the filename without extension using the Path library or some other method:
