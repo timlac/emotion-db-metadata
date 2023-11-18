@@ -19,6 +19,8 @@ def main():
         print("emotion_2_id: ", meta.emotion_2_id)
         print("situation: ", meta.situation)
         print("intensity_level: ", meta.intensity_level)
+        print("version: ", meta.version)
+        print("error: ", meta.error)
         print()
 
 

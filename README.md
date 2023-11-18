@@ -16,7 +16,9 @@ Or clone the repository and enter the directory and run:
 get the filename without extension using the Path library or some other method:
 
 ```python
-filename = Path(filepath).stem)
+from pathlib import Path
+
+filename = Path(filepath).stem
 ```
 
 create metadata object:

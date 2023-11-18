@@ -118,14 +118,28 @@ class Metadata(object):
         """
         e.g. A327_ang_v_1_ver1
         """
-        self.set_default_emotion(name_list[:4])
-        self.version = get_digits_only(name_list[4])
+        if len(name_list) == 5:
+            self.set_default_emotion(name_list[:4])
+            self.version = get_digits_only(name_list[4])
+        elif len(name_list) == 6:
+            self.set_long_name(name_list[:5])
+            self.version = get_digits_only(name_list[5])
+        else:
+            raise ValueError(f'This file was not len 5 or 6 while trying to set it as versioned emotion {self.filename}')
 
     def set_error_file(self, name_list):
         """
         e.g. A438_emb_v_2_e
         """
-        self.set_default_emotion(name_list[:4])
+        if len(name_list) == 5:
+            self.set_default_emotion(name_list[:4])
+        elif len(name_list) == 6:
+            self.set_long_name(name_list[:5])
+        else:
+            raise ValueError(
+                f'This file was not len 5 or 6 while trying to set it as error {self.filename}')
+
+        assert name_list[-1] == error
         self.error = 1
 
     def set_emotion_ids(self):
@@ -153,5 +167,17 @@ class Metadata(object):
                 self.set_versioned_emotion(name_list)
             else:
                 raise ValueError(f'No condition matched for {self.filename}')
+        elif len(name_list) == 6:
+            if name_list[1:3] in [x.split("_") for x in long_emotion_names.values()]:
+                if name_list[5] == error:
+                    self.set_error_file(name_list)
+                elif version.match(name_list[5]):
+                    self.set_versioned_emotion(name_list)
+                else:
+                    raise ValueError(f'No condition matched for {self.filename}')
+            else:
+                raise ValueError(f'No condition matched for {self.filename}')
+        else:
+            raise ValueError(f'No condition matched for {self.filename}')
 
         self.set_emotion_ids()

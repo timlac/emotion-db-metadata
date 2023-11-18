@@ -79,7 +79,7 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.mode, "p")
 
     def test_versioned_emotion(self):
-        filename = "A327_ang_v_1_ver1"
+        filename = "A327_ang_v_2_ver1"
         metadata = Metadata(filename)
 
         self.assertEqual(metadata.video_id, "A327")
@@ -89,7 +89,7 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_1_id, 12)
         self.assertEqual(metadata.emotion_2_id, 100)
 
-        self.assertEqual(metadata.intensity_level, 1)
+        self.assertEqual(metadata.intensity_level, 2)
 
         self.assertEqual(metadata.mode, "v")
         self.assertEqual(metadata.version, 1)
