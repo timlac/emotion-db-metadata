@@ -111,4 +111,16 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.error, 1)
         self.assertEqual(metadata.mode, "v")
 
+    def test_versioned_neutral_emotion(self):
+        filename = "A326_neu_sit2_v_ver1"
 
+        metadata = Metadata(filename)
+        self.assertEqual(metadata.video_id, "A326")
+        self.assertEqual(metadata.mix, 0)
+        self.assertEqual(metadata.emotion_1_abr, "neu")
+        self.assertEqual(metadata.emotion_2_abr, None)
+        self.assertEqual(metadata.emotion_1_id, 22)
+        self.assertEqual(metadata.emotion_2_id, 100)
+        self.assertEqual(metadata.proportions, None)
+
+        self.assertEqual(metadata.mode, "v")

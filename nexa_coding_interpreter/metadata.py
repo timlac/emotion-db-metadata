@@ -117,9 +117,15 @@ class Metadata(object):
     def set_versioned_emotion(self, name_list):
         """
         e.g. A327_ang_v_1_ver1
+
+        TODO: Need to handle case where
+
         """
         if len(name_list) == 5:
-            self.set_default_emotion(name_list[:4])
+            if name_list[1] == neu:
+                self.set_neutral_emotion(name_list[:4])
+            else:
+                self.set_default_emotion(name_list[:4])
             self.version = get_digits_only(name_list[4])
         elif len(name_list) == 6:
             self.set_long_name(name_list[:5])
