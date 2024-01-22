@@ -1,7 +1,8 @@
 # emotionclips-coding-interpreter
+
 Package to convert emotionclips coding to metadata objects
 
-## Installation 
+## Installation
 
 Either install directly from the repository
 
@@ -11,7 +12,7 @@ Or clone the repository and enter the directory and run:
 
 `pip install .`
 
-## Update 
+## Update
 
 `pip install --upgrade git+https://github.com/timlac/nexa-emotionclips-coding-interpreter.git`
 
@@ -28,20 +29,24 @@ filename = Path(filepath).stem
 create metadata object:
 
 ```python 
-metadata = Metadata(filename)
+from nexa_coding_interpreter.metadata import Metadata
+
+meta = Metadata(filename)
 ```
 
 call the metadata object properties, e.g.:
 
 ```python 
-print("filename: ", metadata.filename)
-print("video id: ", metadata.video_id)
-print("emotion 1:", metadata.emotion_1_abr)
-print("emotion_2:", metadata.emotion_2_abr)
-print("emotion_1_id: ", metadata.emotion_1_id)
-print("emotion_2_id: ", metadata.emotion_2_id)
-print("emotion_1_valence: ", metadata.emotion_1_valence)
-print("emotion_2_valence: ", metadata.emotion_2_valence)
-print("situation: ", metadata.situation)
-print("intensity_level: ", metadata.intensity_level)
+print("filename: ", meta.filename)
+print("video id: ", meta.video_id)
+print("mode: ", meta.mode)
+print("emotion 1:", meta.emotion_1_abr)
+print("emotion_2:", meta.emotion_2_abr)
+print("emotion_1_id: ", meta.emotion_1_id)
+print("emotion_2_id: ", meta.emotion_2_id)
+print("situation: ", meta.situation)
+print("version: ", meta.version)
+print("intensity_level: ", meta.intensity_level)
+print("mix: ", meta.mix)
+print("proportions: ", meta.proportions)
 ```
