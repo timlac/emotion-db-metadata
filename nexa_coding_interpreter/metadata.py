@@ -52,10 +52,6 @@ class Metadata(object):
         """
         e.g. ang_disg_5050 or ang_disg_50_70
         """
-
-        print(f'name_list: {name_list} in mixed emotion')
-        print(f"with length {len(name_list)}")
-
         assert Mapper.get_id_from_emotion_abr(name_list[0]) is not None
         assert Mapper.get_id_from_emotion_abr(name_list[1]) is not None
         assert name_list[2].isdigit() or name_list[2].isdigit() and name_list[3].isdigit()
