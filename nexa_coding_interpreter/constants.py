@@ -25,5 +25,7 @@ error = "e"
 
 mix = "mix"
 
+proportions = ["30", "50", "70"]
+
 neu = "neu"
 

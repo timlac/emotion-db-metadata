@@ -1,6 +1,7 @@
 import unittest
 from nexa_py_sentimotion_mapper.sentimotion_mapper import Mapper
 from nexa_coding_interpreter.metadata import Metadata
+from nexa_coding_interpreter.code_modification import CodeModification
 
 
 class TestMetadata(unittest.TestCase):
