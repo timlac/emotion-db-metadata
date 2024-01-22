@@ -50,140 +50,65 @@ class Metadata(object):
 
     def set_mixed_emotions(self, name_list):
         """
-        e.g. A220_mix_ang_disg_5050
+        e.g. ang_disg_5050 or ang_disg_50_70
         """
-        assert name_list[1] == "mix"
-        assert Mapper.get_id_from_emotion_abr(name_list[2]) is not None
-        assert Mapper.get_id_from_emotion_abr(name_list[3]) is not None
-        assert name_list[4].isdigit()
 
-        self.mix = 1
-        self.emotion_1_abr = name_list[2]
-        self.emotion_2_abr = name_list[3]
-        self.proportions = int(name_list[4])
+        print(f'name_list: {name_list} in mixed emotion')
+        print(f"with length {len(name_list)}")
 
-    def set_neutral_emotion(self, name_list):
-        """
-        e.g. A220_neu_sit1_v
-        or A55_neu_p_sit3
-        Note: the coding of neutral emotions is inconsistent, it varies between the two alternatives above
-        """
+        assert Mapper.get_id_from_emotion_abr(name_list[0]) is not None
         assert Mapper.get_id_from_emotion_abr(name_list[1]) is not None
-        assert len(name_list) == 4
+        assert name_list[2].isdigit() or name_list[2].isdigit() and name_list[3].isdigit()
 
-        self.emotion_1_abr = name_list[1]
-
-        if name_list[2] in modes.values():
-            warnings.warn(f'{self.filename} has incorrect syntax. The correct syntax is something like A220_neu_sit1_v')
-
-            self.mode = name_list[2]
-            if name_list[3] in situations.values():
-                self.situation = get_digits_only(name_list[3])
-
-        elif name_list[2] in situations.values():
-            self.situation = get_digits_only(name_list[2])
-            if name_list[3] in modes.values():
-                self.mode = name_list[3]
+        self.emotion_1_abr = name_list[0]
+        self.emotion_2_abr = name_list[1]
+        if len(name_list) == 3:
+            self.proportions = int(name_list[2])
+        elif len(name_list) == 4:
+            self.proportions = int("".join([name_list[2], name_list[3]]))
         else:
-            raise ValueError(f'No condition matched for {self.filename}'
-                             f'tried to set it as neutral emotion bur failed')
-
-    def set_long_name(self, name_list):
-        """
-        e.g. A220_neg_sur_p_1
-        """
-        emotion_1_abr = "_".join((name_list[1], name_list[2]))
-
-        assert Mapper.get_id_from_emotion_abr(emotion_1_abr) is not None
-        assert name_list[3] in modes.values()
-        assert int(name_list[4]) in intensity_levels.values()
-
-        self.emotion_1_abr = emotion_1_abr
-        self.mode = name_list[3]
-        self.intensity_level = int(name_list[4])
-
-    def set_default_emotion(self, name_list):
-        """
-        e.g. A220_adm_p_1
-        """
-        assert Mapper.get_id_from_emotion_abr(name_list[1]) is not None
-        assert name_list[2] in modes.values()
-        assert int(name_list[3]) in intensity_levels.values()
-
-        self.emotion_1_abr = name_list[1]
-        self.mode = name_list[2]
-        self.intensity_level = int(name_list[3])
-
-    def set_versioned_emotion(self, name_list):
-        """
-        e.g. A327_ang_v_1_ver1
-
-        TODO: Need to handle case where
-
-        """
-        if len(name_list) == 5:
-            if name_list[1] == neu:
-                self.set_neutral_emotion(name_list[:4])
-            else:
-                self.set_default_emotion(name_list[:4])
-            self.version = get_digits_only(name_list[4])
-        elif len(name_list) == 6:
-            self.set_long_name(name_list[:5])
-            self.version = get_digits_only(name_list[5])
-        else:
-            raise ValueError(f'This file was not len 5 or 6 while trying to set it as versioned emotion {self.filename}')
-
-    def set_error_file(self, name_list):
-        """
-        e.g. A438_emb_v_2_e
-        """
-        if len(name_list) == 5:
-            self.set_default_emotion(name_list[:4])
-        elif len(name_list) == 6:
-            self.set_long_name(name_list[:5])
-        else:
-            raise ValueError(
-                f'This file was not len 5 or 6 while trying to set it as error {self.filename}')
-
-        assert name_list[-1] == error
-        self.error = 1
+            raise ValueError("No interpretable format for emotion mix for filename {}".format(self.filename))
 
     def set_emotion_ids(self):
         self.emotion_1_id = Mapper.get_id_from_emotion_abr(self.emotion_1_abr)
         if self.mix == 1:
             self.emotion_2_id = Mapper.get_id_from_emotion_abr(self.emotion_2_abr)
 
-    def set_all_metadata(self, name_list):
-        if len(name_list) == 4:
-            if name_list[1] == neu:
-                self.set_neutral_emotion(name_list)
-            else:
-                if Mapper.get_id_from_emotion_abr(name_list[1]) is not None:
-                    self.set_default_emotion(name_list)
-                else:
-                    raise ValueError(f'No condition met for {self.filename}')
-        elif len(name_list) == 5:
-            if name_list[1] == mix:
-                self.set_mixed_emotions(name_list)
-            elif name_list[1:3] in [x.split("_") for x in long_emotion_names.values()]:
-                self.set_long_name(name_list)
-            elif name_list[4] == error:
-                self.set_error_file(name_list)
-            elif version.match(name_list[4]):
-                self.set_versioned_emotion(name_list)
-            else:
-                raise ValueError(f'No condition matched for {self.filename}')
-        elif len(name_list) == 6:
-            if name_list[1:3] in [x.split("_") for x in long_emotion_names.values()]:
-                if name_list[5] == error:
-                    self.set_error_file(name_list)
-                elif version.match(name_list[5]):
-                    self.set_versioned_emotion(name_list)
-                else:
-                    raise ValueError(f'No condition matched for {self.filename}')
-            else:
-                raise ValueError(f'No condition matched for {self.filename}')
+    def set_emotion(self, name_list):
+        if len(name_list) == 1:
+            if Mapper.get_id_from_emotion_abr(name_list[0]) is not None:
+                self.emotion_1_abr = name_list[0]
+        elif len(name_list) == 2:
+            if name_list in long_emotion_names.values():
+                self.emotion_1_abr = "_".join(name_list)
         else:
-            raise ValueError(f'No condition matched for {self.filename}')
+            raise ValueError("No interpretable format for filename {}".format(self.filename))
+
+    def set_all_metadata(self, name_list):
+
+        new_name_list = []
+
+        for item in name_list:
+            if video_id_pattern.match(item):
+                self.video_id = item
+            elif version_pattern.match(item):
+                self.version = get_digits_only(item)
+            elif item == error:
+                self.error = True
+            elif situation_pattern.match(item):
+                self.situation = get_digits_only(item)
+            elif item == mix:
+                self.mix = 1
+            elif item in modes.values():
+                self.mode = item
+            elif item in intensity_levels.values():
+                self.intensity_level = int(item)
+            else:
+                new_name_list.append(item)
+
+        if self.mix:
+            self.set_mixed_emotions(new_name_list)
+        else:
+            self.set_emotion(new_name_list)
 
         self.set_emotion_ids()

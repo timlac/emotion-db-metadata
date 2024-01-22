@@ -1,7 +1,6 @@
 import unittest
 from nexa_py_sentimotion_mapper.sentimotion_mapper import Mapper
 from nexa_coding_interpreter.metadata import Metadata
-from nexa_coding_interpreter.code_modification import CodeModification
 
 
 class TestMetadata(unittest.TestCase):
@@ -10,6 +9,18 @@ class TestMetadata(unittest.TestCase):
         filename = "A404_mix_ang_disg_7030"
         metadata = Metadata(filename)
 
+        self.assertEqual(metadata.video_id, "A404")
+        self.assertEqual(metadata.mix, 1)
+        self.assertEqual(metadata.emotion_1_abr, "ang")
+        self.assertEqual(metadata.emotion_2_abr, "disg")
+        self.assertEqual(metadata.emotion_1_id, 12)
+        self.assertEqual(metadata.emotion_2_id, 35)
+
+        self.assertEqual(metadata.proportions, 7030)
+
+
+        filename = "A404_mix_ang_disg_70_30"
+        metadata = Metadata(filename)
         self.assertEqual(metadata.video_id, "A404")
         self.assertEqual(metadata.mix, 1)
         self.assertEqual(metadata.emotion_1_abr, "ang")
@@ -30,10 +41,8 @@ class TestMetadata(unittest.TestCase):
         self.assertEqual(metadata.emotion_1_id, 22)
         self.assertEqual(metadata.emotion_2_id, 100)
 
-
         self.assertEqual(metadata.mode, "v")
         self.assertEqual(metadata.situation, 2)
-
 
         filename = "A55_neu_p_sit3"
         metadata = Metadata(filename)
