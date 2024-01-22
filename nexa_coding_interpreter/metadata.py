@@ -69,11 +69,6 @@ class Metadata(object):
         else:
             raise ValueError("No interpretable format for emotion mix for filename {}".format(self.filename))
 
-    def set_emotion_ids(self):
-        self.emotion_1_id = Mapper.get_id_from_emotion_abr(self.emotion_1_abr)
-        if self.mix == 1:
-            self.emotion_2_id = Mapper.get_id_from_emotion_abr(self.emotion_2_abr)
-
     def set_emotion(self, name_list):
         if len(name_list) == 1:
             if Mapper.get_id_from_emotion_abr(name_list[0]) is not None:
@@ -83,6 +78,11 @@ class Metadata(object):
                 self.emotion_1_abr = "_".join(name_list)
         else:
             raise ValueError("No interpretable format for filename {}".format(self.filename))
+
+    def set_emotion_ids(self):
+        self.emotion_1_id = Mapper.get_id_from_emotion_abr(self.emotion_1_abr)
+        if self.mix == 1:
+            self.emotion_2_id = Mapper.get_id_from_emotion_abr(self.emotion_2_abr)
 
     def set_all_metadata(self, name_list):
 
