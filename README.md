@@ -6,7 +6,7 @@ Package to parse metadata from sentimotionDB filenames
 
 Either install directly from the repository
 
-`pip install git+https://github.com/timlac/nnexa-sentimotion-filename-parser.git`
+`pip install git+https://github.com/timlac/nexa-sentimotion-filename-parser.git`
 
 Or clone the repository and enter the directory and run:
 
