@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='nexa_coding_interpreter',
+    name='nexa_sentimotion_filename_parser',
     version='0.7',
     packages=find_packages(),
     install_requires=[

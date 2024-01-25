@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from nexa_coding_interpreter.metadata import Metadata
+from nexa_sentimotion_filename_parser.metadata import Metadata
 
 
 def main():

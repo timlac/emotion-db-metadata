@@ -1,12 +1,12 @@
-# emotionclips-coding-interpreter
+# sentimotion-filename-parser
 
-Package to convert emotionclips coding to metadata objects
+Package to parse metadata from sentimotionDB filenames
 
 ## Installation
 
 Either install directly from the repository
 
-`pip install git+https://github.com/timlac/nexa-emotionclips-coding-interpreter.git`
+`pip install git+https://github.com/timlac/nnexa-sentimotion-filename-parser.git`
 
 Or clone the repository and enter the directory and run:
 
@@ -14,7 +14,7 @@ Or clone the repository and enter the directory and run:
 
 ## Update
 
-`pip install --upgrade git+https://github.com/timlac/nexa-emotionclips-coding-interpreter.git`
+`pip install --upgrade git+https://github.com/timlac/nexa-sentimotion-filename-parser.git`
 
 ## Usage
 
@@ -29,7 +29,7 @@ filename = Path(filepath).stem
 create metadata object:
 
 ```python 
-from nexa_coding_interpreter.metadata import Metadata
+from nexa_sentimotion_filename_parser.metadata import Metadata
 
 meta = Metadata(filename)
 ```

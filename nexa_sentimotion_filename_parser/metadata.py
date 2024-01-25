@@ -1,9 +1,9 @@
 import warnings
 
 from nexa_py_sentimotion_mapper.sentimotion_mapper import Mapper
-from nexa_coding_interpreter.utils import name2list, get_digits_only
+from nexa_sentimotion_filename_parser.utils import name2list, get_digits_only
 
-from nexa_coding_interpreter.constants import *
+from nexa_sentimotion_filename_parser.constants import *
 
 
 class Metadata(object):
