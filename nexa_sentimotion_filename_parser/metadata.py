@@ -90,7 +90,7 @@ class Metadata(object):
             elif version_pattern.match(item):
                 self.version = get_digits_only(item)
             elif item == error:
-                self.error = True
+                self.error = 1
             elif situation_pattern.match(item):
                 self.situation = get_digits_only(item)
             elif item == mix:
