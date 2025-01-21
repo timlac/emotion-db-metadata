@@ -1,5 +1,6 @@
-from nexa_py_sentimotion_mapper.sentimotion_mapper import Mapper
+from nexa_sentimotion_filename_parser.metadata import Metadata
 
-ret = "A438_emb_v_2_e".split("_")
+filename = "A438_emb_v_2_e"
+metadata = Metadata(filename)
 
-print(ret[:5])
+print(metadata.error)
